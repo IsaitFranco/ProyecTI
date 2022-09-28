@@ -7,7 +7,7 @@ public class FileTools {
     BufferedReader bufferedReader = null;
     FileWriter filenew = null;
     PrintWriter pw = null;
-
+// Metodo de lectura de archivo txt
     public void ReadFile() {
         try {
             fileReader = new FileReader(nameFile);
@@ -32,7 +32,7 @@ public class FileTools {
         }
     }
 
-
+// Metodo de creacion de archivo txt
     public void WriteFile() {
         try {
             filenew = new FileWriter("C:\\Users\\Mi Equipo\\Desktop\\nuevo.txt");
