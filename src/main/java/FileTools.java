@@ -1,16 +1,23 @@
 import java.io.*;
+import java.nio.file.Path;
 
 public class FileTools {
 
-    String nameFile = "C:\\Users\\Mi Equipo\\Desktop\\Archivo1.txt";
+    String nameFile = "";
     FileReader fileReader = null;
     BufferedReader bufferedReader = null;
-    FileWriter filenew = null;
+    FileWriter fileNew = null;
     PrintWriter pw = null;
-// Metodo de lectura de archivo txt
-    public void ReadFile() {
+    File rutaArchivo = null;
+    public String texto2 = "";
+
+    // Metodo de lectura de archivo txt
+    public void readFile() {
+
         try {
-            fileReader = new FileReader(nameFile);
+            nameFile = "Archivo1.txt";
+            rutaArchivo = new File("C:/Users/Mi Equipo/Desktop/" + nameFile);
+            fileReader = new FileReader(rutaArchivo);
             bufferedReader = new BufferedReader(fileReader);
             StringBuilder stringBuilder = new StringBuilder("");
             String linea;
@@ -18,6 +25,7 @@ public class FileTools {
                 stringBuilder.append(linea + "\n");
             }
             System.out.println("Contenido" + stringBuilder.toString());
+             texto2 = stringBuilder.toString();
         } catch (IOException e) {
             System.out.println("Excepcion leyendo archivo:" + e.getMessage());
         } finally {
@@ -30,27 +38,34 @@ public class FileTools {
                 System.out.println("Excepcion cerrado" + e.getMessage());
             }
         }
+
     }
 
 // Metodo de creacion de archivo txt
-    public void WriteFile() {
-        try {
-            filenew = new FileWriter("C:\\Users\\Mi Equipo\\Desktop\\nuevo.txt");
-            pw = new PrintWriter(filenew);
-            for (int i = 0; i < 10; i++)
-                pw.println("Linea" + i);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+    public void writeFile() {
+        nameFile = "nuevo.txt";
+        rutaArchivo = new File("C:/Users/Mi Equipo/Desktop/" + nameFile);
+        if (rutaArchivo.exists() == false) {
             try {
-                // Nuevamente aprovechamos el finally  para asegurarnos que se cierra el fichero
-                if (null != filenew)
-                    filenew.close();
-            } catch (Exception e2) {
-                e2.printStackTrace();
+                fileNew = new FileWriter(rutaArchivo);
+                pw = new PrintWriter(fileNew);
+                for (int i = 0; i < 10; i++)
+                    pw.println("Linea" + i);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    // Nuevamente aprovechamos el finally  para asegurarnos que se cierra el fichero
+                    if (null != fileNew)
+                        fileNew.close();
+                    System.out.println("Se creo el archivo correctamente");
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
             }
+
+        } else {
+            System.out.println("El archivo ya esta creado");
         }
-
-
     }
 }
