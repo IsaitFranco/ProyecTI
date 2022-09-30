@@ -3,20 +3,18 @@ import java.nio.file.Path;
 
 public class FileTools {
 
-    String nameFile = "";
+   // String path = "";
     FileReader fileReader = null;
     BufferedReader bufferedReader = null;
     FileWriter fileNew = null;
     PrintWriter pw = null;
     File rutaArchivo = null;
     public String texto2 = "";
-
     // Metodo de lectura de archivo txt
-    public void readFile() {
+    public void readFile(String path) {
 
         try {
-            nameFile = "Archivo1.txt";
-            rutaArchivo = new File("C:/Users/Mi Equipo/Desktop/" + nameFile);
+            rutaArchivo = new File(path);
             fileReader = new FileReader(rutaArchivo);
             bufferedReader = new BufferedReader(fileReader);
             StringBuilder stringBuilder = new StringBuilder("");
@@ -42,9 +40,8 @@ public class FileTools {
     }
 
 // Metodo de creacion de archivo txt
-    public void writeFile() {
-        nameFile = "nuevo.txt";
-        rutaArchivo = new File("C:/Users/Mi Equipo/Desktop/" + nameFile);
+    public void writeFile(String path2) {
+        rutaArchivo = new File(path2);
         if (rutaArchivo.exists() == false) {
             try {
                 fileNew = new FileWriter(rutaArchivo);
